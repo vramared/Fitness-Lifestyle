@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Fitness Lifestyle App</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="loginMSG">Login to Facebook</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="greetingMSG">Welcome to the Fitness Lifestyle App</string>
+    <string name="workout_desc">Enter the workout section of the app.</string>
+    <string name="previous_workouts">Your Previously Logged Workouts</string>
+    <string name="workout">"Workout Name"</string>
+    <string name="sets">"# of Sets"</string>
+    <string name="reps">"# of Reps"</string>
+    <string name="workout_date">"Date of Workout"</string>
+    <string name="workout_image_desc">"A picture of the user's selected workout.</string>
+    <string name="facebook_app_id">"2036497976407818"</string>
+    <string name="fb_login_protocol_scheme">fb2036497976407818</string>
+    <string name="home_button">"Home"</string>
+    <string name="fitness_button">"Fitness"</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+</resources>
