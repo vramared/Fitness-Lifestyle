@@ -8,12 +8,12 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends BaseDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        getLayoutInflater().inflate(R.layout.activity_home_screen, frameLayout);
 
         ImageView logWork = (ImageView)findViewById(R.id.logIMG);
         logWork.setOnClickListener(new View.OnClickListener() {
@@ -23,5 +23,10 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(addPage);
             }
         });
+    }
+
+    protected void onResume() {
+        super.onResume();
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 }

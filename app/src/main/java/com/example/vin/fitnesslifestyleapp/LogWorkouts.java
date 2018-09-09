@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class LogWorkouts extends AppCompatActivity {
+public class LogWorkouts extends BaseDrawerActivity {
 
     private String name, reps, sets, date;
 
@@ -34,7 +34,7 @@ public class LogWorkouts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_workouts);
+        getLayoutInflater().inflate(R.layout.activity_log_workouts, frameLayout);
 
         workoutList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -115,6 +115,11 @@ public class LogWorkouts extends AppCompatActivity {
             }
         });
 
+    }
+
+    protected void onResume() {
+        super.onResume();
+        navigationView.getMenu().getItem(1).setChecked(true);
     }
 
     public void addCard() {
