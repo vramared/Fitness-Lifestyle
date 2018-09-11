@@ -19,4 +19,7 @@
     <string name="fitness_button">"Fitness"</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="user_icon">"Logout"</string>
+    <string name="sample_user">"User"</string>
+    <string name="sample_email">"jdoe@gmail.com"</string>
 </resources>

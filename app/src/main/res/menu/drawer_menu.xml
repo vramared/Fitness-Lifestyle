@@ -13,8 +13,12 @@
             android:id="@+id/weightIcon"
             android:icon="@drawable/ic_fitness_center_black_24dp"
             android:title="@string/fitness_button"/>
-
+        <item
+            android:id="@+id/manageUser"
+            android:icon="@drawable/ic_user"
+            android:title="@string/user_icon"/>
 
     </group>
+
 
 </menu>

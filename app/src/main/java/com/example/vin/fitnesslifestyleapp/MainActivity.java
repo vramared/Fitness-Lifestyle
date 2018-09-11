@@ -27,11 +27,19 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 
 public class MainActivity extends BaseDrawerActivity {
@@ -40,6 +48,8 @@ public class MainActivity extends BaseDrawerActivity {
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private AccessToken accessToken;
+
+    private String uEmail;
 
 
     @Override
@@ -66,15 +76,44 @@ public class MainActivity extends BaseDrawerActivity {
     }
 
     public void facebookLogin() {
+
         loginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
         callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), "FB Login Worked", Toast.LENGTH_SHORT).show();
+/*
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.i("Nan", "Binner");
+                                try{
+                                    //JSONObject jsonObject = (JSONObject) new JSONTokener(uEmail).nextValue();
+                                    uEmail = object.getString("email");
+
+                                }
+                                catch(JSONException e){}
+                            }
+
+                        });
+                        */
+
+/*
+
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
+*/
                 Intent homePage = new Intent(MainActivity.this, HomeScreen.class);
                 startActivity(homePage);
+
+
             }
+
 
             @Override
             public void onCancel() {
