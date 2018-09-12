@@ -72,7 +72,6 @@ public class MainActivity extends BaseDrawerActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //navigationView.getMenu().getItem(0).setChecked(true);
     }
 
     public void facebookLogin() {
@@ -84,34 +83,9 @@ public class MainActivity extends BaseDrawerActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), "FB Login Worked", Toast.LENGTH_SHORT).show();
-/*
-                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                Log.i("Nan", "Binner");
-                                try{
-                                    //JSONObject jsonObject = (JSONObject) new JSONTokener(uEmail).nextValue();
-                                    uEmail = object.getString("email");
 
-                                }
-                                catch(JSONException e){}
-                            }
-
-                        });
-                        */
-
-/*
-
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday");
-                request.setParameters(parameters);
-                request.executeAsync();
-*/
                 Intent homePage = new Intent(MainActivity.this, HomeScreen.class);
                 startActivity(homePage);
-
-
             }
 
 

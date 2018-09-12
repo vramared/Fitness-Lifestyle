@@ -26,6 +26,7 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.login.widget.ProfilePictureView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,8 +43,9 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     NavigationView navigationView;
     View headerView;
     TextView fb_email;
-    String email = "test";
+    String email = "test", fb_id;
     TextView fb_name;
+    ProfilePictureView profilePictureView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
         headerView = navigationView.getHeaderView(0);
         fb_email = (TextView) headerView.findViewById(R.id.fb_user_email);
         fb_name = (TextView) headerView.findViewById(R.id.fb_user_name);
+        profilePictureView = (ProfilePictureView) headerView.findViewById(R.id.prof_pic);
 
         if(AccessToken.getCurrentAccessToken() != null) {
             importFB();
@@ -81,7 +84,6 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
                     new GraphRequest.GraphJSONObjectCallback() {
                         @Override
                         public void onCompleted(JSONObject object, GraphResponse response) {
-                            Log.i("Nan3", email);
 
                             if (response.getError() != null) {
                                 // handle error
@@ -91,14 +93,16 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
                                 fb_email.setText(email);
                                 String name = object.optString("name");
                                 fb_name.setText(name);
-                                String birthday = object.optString("user_birthday");
+                                fb_id = object.optString("id");
+                                profilePictureView.setProfileId(fb_id);
+                                Log.i("ID", fb_id);
                             }
 
                         }
                     });
 
             Bundle parameters = new Bundle();
-            parameters.putString("fields", "id,name,email,gender, birthday");
+            parameters.putString("fields", "id,name,email,picture.type(large)");
             request.setParameters(parameters);
             request.executeAsync();
 

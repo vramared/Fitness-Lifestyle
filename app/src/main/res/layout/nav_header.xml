@@ -6,13 +6,13 @@
     android:background="@color/colorAccent"
     android:orientation="vertical"
     android:paddingLeft="16dp"
-    android:paddingTop="36dp"
+    android:paddingTop="54dp"
     android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round" />
+    <com.facebook.login.widget.ProfilePictureView
+        android:id="@+id/prof_pic"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
     <TextView
         android:id="@+id/fb_user_name"
