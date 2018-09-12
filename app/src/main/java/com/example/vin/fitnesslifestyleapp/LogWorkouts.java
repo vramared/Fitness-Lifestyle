@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +16,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -29,6 +36,8 @@ public class LogWorkouts extends BaseDrawerActivity {
 
     private boolean parseReps, parseSets;
     private Toast errorToast;
+
+    private static final String FILE_NAME = "user_data.txt";
 
 
     @Override
@@ -46,6 +55,7 @@ public class LogWorkouts extends BaseDrawerActivity {
 
 
         openDialog();
+        loadWorkouts();
 
     }
 
@@ -124,6 +134,66 @@ public class LogWorkouts extends BaseDrawerActivity {
 
     public void addCard() {
         workoutList.add(new Workout("hello", name, date, sets, reps));
+        saveWorkout();
+    }
+
+    public void saveWorkout() {
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_APPEND);
+            fos.write(name.getBytes());
+            fos.write("-".getBytes());
+            fos.write(date.getBytes());
+            fos.write("-".getBytes());
+            fos.write(sets.getBytes());
+            fos.write("-".getBytes());
+            fos.write(reps.getBytes());
+            fos.write("\n".getBytes());
+            Log.i("FilePath", LogWorkouts.this.getFilesDir().getAbsolutePath());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void loadWorkouts() {
+        FileInputStream fis = null;
+        String[] workoutInfo;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+            while((text = br.readLine()) != null) {
+                workoutInfo = text.split("-");
+                workoutList.add(new Workout("hello", workoutInfo[0], workoutInfo[1], workoutInfo[2], workoutInfo[3]));
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     public static boolean isInteger(String s) {
