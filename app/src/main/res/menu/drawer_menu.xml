@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <group android:checkableBehavior="single">
-
+    <group android:checkableBehavior="single"
+        android:id="@+id/page_btns">
         <item
             android:id="@+id/homeIcon"
             android:icon="@drawable/ic_home_black_24dp"
@@ -13,6 +13,10 @@
             android:id="@+id/weightIcon"
             android:icon="@drawable/ic_fitness_center_black_24dp"
             android:title="@string/fitness_button"/>
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/account_cntrl">
         <item
             android:id="@+id/manageUser"
             android:icon="@drawable/ic_user"
