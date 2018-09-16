@@ -2,6 +2,7 @@ package com.example.vin.fitnesslifestyleapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -38,6 +43,8 @@ public class LogWorkouts extends BaseDrawerActivity {
     private Toast errorToast;
 
     private static final String FILE_NAME = "user_data.txt";
+
+    private int duplicateCounter;
 
 
     @Override
@@ -133,8 +140,28 @@ public class LogWorkouts extends BaseDrawerActivity {
     }
 
     public void addCard() {
-        workoutList.add(new Workout("hello", name, date, sets, reps));
-        saveWorkout();
+        boolean check = checkDuplicate(name);
+        if(check) {
+            Path path = Paths.get("/data/user/0/com.example.vin.fitnesslifestyleapp/files/user_data.txt");
+            try {
+                List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+                lines.add(duplicateCounter, name + "-" + date + "-" + sets + "-" + reps);
+                Files.write(path, lines, StandardCharsets.UTF_8);
+                loadWorkouts();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else {
+            workoutList.add(new Workout("hello", name, date, sets, reps));
+            saveWorkout();
+        }
+        /*
+        Log.i("Has Duplicate", Boolean.toString(check));
+        Log.i("Line", Integer.toString(duplicateCounter));
+        */
     }
 
     public void saveWorkout() {
@@ -173,11 +200,27 @@ public class LogWorkouts extends BaseDrawerActivity {
             fis = openFileInput(FILE_NAME);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-            while((text = br.readLine()) != null) {
-                workoutInfo = text.split("-");
-                workoutList.add(new Workout("hello", workoutInfo[0], workoutInfo[1], workoutInfo[2], workoutInfo[3]));
+            String line, nameBefore = "";
+
+            while((line = br.readLine()) != null) {
+                workoutInfo = line.split("-");
+                if(!(nameBefore.equals(workoutInfo[0]))) {
+                    nameBefore = workoutInfo[0];
+                    Workout holder = findWorkout(workoutInfo[0]);
+                    if(holder == null) {
+                        workoutList.add(new Workout("hello", workoutInfo[0], workoutInfo[1], workoutInfo[2], workoutInfo[3]));
+                    }
+                    else {
+                        Log.i("updating list", "updated");
+                        holder.setDate(workoutInfo[1]);
+                        holder.setSets(workoutInfo[2]);
+                        holder.setReps(workoutInfo[3]);
+                        startActivity(new Intent(LogWorkouts.this, LogWorkouts.class));
+                    }
+                }
+                else if(nameBefore.equals(workoutInfo[0])) {
+                    nameBefore = workoutInfo[0];
+                }
 
             }
         } catch (FileNotFoundException e) {
@@ -194,6 +237,41 @@ public class LogWorkouts extends BaseDrawerActivity {
             }
         }
 
+    }
+
+    public Workout findWorkout(String name) {
+        for(int i = 0; i < workoutList.size(); i++) {
+            if((workoutList.get(i).getName()).equals(name)) {
+                Log.i("Position", Integer.toString(i));
+                return workoutList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean checkDuplicate(String wName) {
+        FileInputStream fis = null;
+        String[] workoutInfo;
+        duplicateCounter = 0;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while((line = br.readLine()) != null) {
+                workoutInfo = line.split("-");
+                if(workoutInfo[0].equals(wName)) {
+                    return true;
+                }
+                duplicateCounter++;
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static boolean isInteger(String s) {

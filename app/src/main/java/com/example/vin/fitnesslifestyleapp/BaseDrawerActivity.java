@@ -31,6 +31,7 @@ import com.facebook.login.widget.ProfilePictureView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Arrays;
 
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
@@ -135,6 +136,13 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
                     LoginManager.getInstance().logOut();
                     finishAffinity();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    break;
+                case R.id.clearWorkouts:
+                    File dir = getFilesDir();
+                    File file = new File(dir, "user_data.txt");
+                    boolean deleted = file.delete();
+                    startActivity(new Intent(getApplicationContext(), LogWorkouts.class));
+                    break;
             }
             drawer.closeDrawer(GravityCompat.START);
         }

@@ -21,6 +21,10 @@
             android:id="@+id/manageUser"
             android:icon="@drawable/ic_user"
             android:title="@string/user_icon"/>
+        <item
+            android:id="@+id/clearWorkouts"
+            android:icon="@drawable/ic_clear_all"
+            android:title="Clear Workouts"/>
 
     </group>
 
