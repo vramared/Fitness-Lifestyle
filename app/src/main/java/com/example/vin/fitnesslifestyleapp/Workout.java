@@ -50,4 +50,8 @@ public class Workout {
     public void setReps(String reps) {
         this.reps = reps;
     }
+
+    public String toString() {
+        return this.date + ": " + this.sets + " " + this.reps;
+    }
 }

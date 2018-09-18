@@ -45,10 +45,7 @@ import java.util.Arrays;
 public class MainActivity extends BaseDrawerActivity {
 
 
-    private LoginButton loginButton;
     private CallbackManager callbackManager;
-    private AccessToken accessToken;
-
     private String uEmail;
 
 
@@ -60,7 +57,7 @@ public class MainActivity extends BaseDrawerActivity {
 
         facebookLogin();
 
-        accessToken = AccessToken.getCurrentAccessToken();
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = (accessToken != null) && (!accessToken.isExpired());
         if(isLoggedIn) {
             Intent homePage = new Intent(MainActivity.this, HomeScreen.class);
@@ -76,7 +73,7 @@ public class MainActivity extends BaseDrawerActivity {
 
     public void facebookLogin() {
 
-        loginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        LoginButton loginButton = (LoginButton) findViewById(R.id.fb_login_button);
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
         callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {

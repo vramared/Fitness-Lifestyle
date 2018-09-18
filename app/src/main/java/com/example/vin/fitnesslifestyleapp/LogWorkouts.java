@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -34,9 +31,6 @@ public class LogWorkouts extends BaseDrawerActivity {
 
     private String name, reps, sets, date;
 
-    private RecyclerView recyclerView;
-    private WorkoutAdapter adapter;
-
     private List<Workout> workoutList;
 
     private boolean parseReps, parseSets;
@@ -53,11 +47,11 @@ public class LogWorkouts extends BaseDrawerActivity {
         getLayoutInflater().inflate(R.layout.activity_log_workouts, frameLayout);
 
         workoutList = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new WorkoutAdapter(this, workoutList);
+        WorkoutAdapter adapter = new WorkoutAdapter(this, workoutList);
         recyclerView.setAdapter(adapter);
 
 
@@ -86,7 +80,7 @@ public class LogWorkouts extends BaseDrawerActivity {
                 final EditText edit_sets  = (EditText) dialogView.findViewById(R.id.edit_sets);
                 final EditText edit_date = (EditText) dialogView.findViewById(R.id.edit_wDate);
 
-                SimpleDateFormat sdf = new SimpleDateFormat( "MM/dd/yyyy" );
+                SimpleDateFormat sdf = new SimpleDateFormat( "MM/dd/yyyy", Locale.getDefault() );
                 edit_date.setText(sdf.format(new Date()));
 
                 final AlertDialog alert = builder.create();
@@ -142,7 +136,7 @@ public class LogWorkouts extends BaseDrawerActivity {
     public void addCard() {
         boolean check = checkDuplicate(name);
         if(check) {
-            Path path = Paths.get("/data/user/0/com.example.vin.fitnesslifestyleapp/files/user_data.txt");
+            Path path = Paths.get(getApplicationContext().getFilesDir().getPath() + "/user_data.txt");
             try {
                 List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
                 lines.add(duplicateCounter, name + "-" + date + "-" + sets + "-" + reps);
@@ -250,7 +244,7 @@ public class LogWorkouts extends BaseDrawerActivity {
     }
 
     public boolean checkDuplicate(String wName) {
-        FileInputStream fis = null;
+        FileInputStream fis;
         String[] workoutInfo;
         duplicateCounter = 0;
         try {
