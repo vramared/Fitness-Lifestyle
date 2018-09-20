@@ -12,6 +12,7 @@ public class HomeScreen extends BaseDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_home_screen, frameLayout);
+        setTitle("Home");
 
         ImageView logWork = (ImageView)findViewById(R.id.logIMG);
         logWork.setOnClickListener(new View.OnClickListener() {

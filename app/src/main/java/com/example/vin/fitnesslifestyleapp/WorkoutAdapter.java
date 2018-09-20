@@ -35,12 +35,19 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
 
     @Override
     public void onBindViewHolder(@NonNull WorkoutViewHolder holder, int position) {
+
         Workout workout = workoutList.get(position);
         holder.workoutName.setText(workout.getName());
         holder.numReps.setText(workout.getReps());
         holder.numSets.setText(workout.getSets());
         holder.workoutDate.setText(workout.getDate());
-        holder.imageView.setImageResource(R.drawable.geometrical_landscape);
+
+        int[] images = {R.drawable.workout1, R.drawable.workout2, R.drawable.workout3,
+                R.drawable.workout4, R.drawable.workout5, R.drawable.workout6, R.drawable.workout7,
+                R.drawable.workout8, R.drawable.workout9, R.drawable.workout10, R.drawable.workout11,
+                R.drawable.workout12, R.drawable.workout13, R.drawable.workout14, R.drawable.workout15};
+
+        holder.imageView.setImageResource(images[workout.getImgURL()]);
 
         final String wName = holder.workoutName.getText().toString();
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {

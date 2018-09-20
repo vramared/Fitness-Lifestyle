@@ -45,7 +45,7 @@ public class LogWorkouts extends BaseDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_log_workouts, frameLayout);
-
+        setTitle("Log Your Workouts");
         workoutList = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -149,7 +149,7 @@ public class LogWorkouts extends BaseDrawerActivity {
 
         }
         else {
-            workoutList.add(new Workout("hello", name, date, sets, reps));
+            workoutList.add(new Workout(rng(), name, date, sets, reps));
             saveWorkout();
         }
         /*
@@ -202,7 +202,7 @@ public class LogWorkouts extends BaseDrawerActivity {
                     nameBefore = workoutInfo[0];
                     Workout holder = findWorkout(workoutInfo[0]);
                     if(holder == null) {
-                        workoutList.add(new Workout("hello", workoutInfo[0], workoutInfo[1], workoutInfo[2], workoutInfo[3]));
+                        workoutList.add(new Workout(rng(), workoutInfo[0], workoutInfo[1], workoutInfo[2], workoutInfo[3]));
                     }
                     else {
                         Log.i("updating list", "updated");
@@ -279,5 +279,10 @@ public class LogWorkouts extends BaseDrawerActivity {
             return false;
         }
         return true;
+    }
+
+    public int rng() {
+        int num = (int) (Math.random()*(15));
+        return num;
     }
 }

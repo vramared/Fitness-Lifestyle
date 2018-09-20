@@ -1,7 +1,6 @@
 package com.example.vin.fitnesslifestyleapp;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,6 +32,7 @@ public class WorkoutInfo extends BaseDrawerActivity {
         getLayoutInflater().inflate(R.layout.activity_workout_info, frameLayout);
 
         getIntentData();
+        setTitle(workoutName + " Info");
         TextView header = (TextView) findViewById(R.id.wName);
         header.setText(workoutName);
 
@@ -70,7 +70,7 @@ public class WorkoutInfo extends BaseDrawerActivity {
             while((line = br.readLine()) != null) {
                 workoutInfo = line.split("-");
                 if(workoutInfo[0].equals(workoutName)) {
-                    history.add(new Workout("hello", workoutInfo[0], workoutInfo[1], workoutInfo[2], workoutInfo[3]));
+                    history.add(new Workout(0, workoutInfo[0], workoutInfo[1], workoutInfo[2], workoutInfo[3]));
                     counter++;
                 }
             }

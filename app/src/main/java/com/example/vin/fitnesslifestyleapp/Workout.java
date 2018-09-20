@@ -1,9 +1,10 @@
 package com.example.vin.fitnesslifestyleapp;
 
 public class Workout {
-    private String imgURL, name, date, sets, reps;
+    private String name, date, sets, reps;
+    private int imgURL;
 
-    public Workout(String imgURL, String name, String date, String sets, String reps) {
+    public Workout(int imgURL, String name, String date, String sets, String reps) {
         this.imgURL = imgURL;
         this.name = name;
         this.date = date;
@@ -11,7 +12,7 @@ public class Workout {
         this.reps = reps + " Reps";
     }
 
-    public String getImgURL() {
+    public int getImgURL() {
         return imgURL;
     }
 
@@ -31,7 +32,7 @@ public class Workout {
         return reps;
     }
 
-    public void setImgURL(String imgURL) {
+    public void setImgURL(int imgURL) {
         this.imgURL = imgURL;
     }
 
