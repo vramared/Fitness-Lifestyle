@@ -55,4 +55,13 @@ public class Workout {
     public String toString() {
         return this.date + ": " + this.sets + " " + this.reps;
     }
+
+    public boolean equals(Workout holder) {
+        boolean equal = false;
+        if(this.getName().equals(holder.getName()) && this.getDate().equals(holder.getDate()) &&
+                this.getSets().equals(holder.getSets()) && this.getReps().equals(holder.getReps())) {
+            equal = true;
+        }
+        return equal;
+    }
 }

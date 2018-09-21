@@ -29,7 +29,7 @@
     <ImageView
         android:id="@+id/logIMG"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="183dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="37dp"
@@ -45,7 +45,7 @@
 
     <View
         android:id="@+id/divider"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -55,5 +55,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/greetingMSG" />
+
+    <TextView
+        android:id="@+id/or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:text="@string/or"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="32sp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="183dp"
+        android:src="@drawable/foods"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="320dp"/>
 
 </RelativeLayout>

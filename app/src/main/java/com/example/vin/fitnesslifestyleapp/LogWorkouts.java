@@ -40,6 +40,10 @@ public class LogWorkouts extends BaseDrawerActivity {
 
     private int duplicateCounter;
 
+    private WorkoutAdapter adapter;
+
+    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +51,11 @@ public class LogWorkouts extends BaseDrawerActivity {
         getLayoutInflater().inflate(R.layout.activity_log_workouts, frameLayout);
         setTitle("Log Your Workouts");
         workoutList = new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        WorkoutAdapter adapter = new WorkoutAdapter(this, workoutList);
+        adapter = new WorkoutAdapter(this, workoutList);
         recyclerView.setAdapter(adapter);
 
 
@@ -207,9 +211,9 @@ public class LogWorkouts extends BaseDrawerActivity {
                     else {
                         Log.i("updating list", "updated");
                         holder.setDate(workoutInfo[1]);
-                        holder.setSets(workoutInfo[2]);
-                        holder.setReps(workoutInfo[3]);
-                        startActivity(new Intent(LogWorkouts.this, LogWorkouts.class));
+                        holder.setSets(workoutInfo[2] + " Sets");
+                        holder.setReps(workoutInfo[3] + " Reps");
+                        recyclerView.setAdapter(adapter);
                     }
                 }
                 else if(nameBefore.equals(workoutInfo[0])) {
