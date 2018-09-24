@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -166,13 +165,12 @@ public class WorkoutInfo extends BaseDrawerActivity {
         int x =counter-1;
 
         int sets, reps;
-        String[] parseSets, parseReps;
+        String[] parseSets;
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<DataPoint>();
         for(int i = 0; i < counter; i++) {
             parseSets = history.get(x).getSets().split(" ");
-            parseReps = history.get(x).getReps().split(" ");
             sets = Integer.parseInt(parseSets[0]);
             reps = Integer.parseInt(parseSets[0]);
             y = sets*reps;

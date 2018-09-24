@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder> {
@@ -19,7 +18,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     private Context mContext;
     private List<Workout> workoutList;
 
-    public WorkoutAdapter(Context mContext, List<Workout> workoutList) {
+    private WorkoutAdapter(Context mContext, List<Workout> workoutList) {
         this.mContext = mContext;
         this.workoutList = workoutList;
     }
@@ -72,7 +71,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         TextView workoutName, numSets, numReps, workoutDate;
         ConstraintLayout constraintLayout;
 
-        public WorkoutViewHolder(View itemView) {
+        private WorkoutViewHolder(View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.imageView);

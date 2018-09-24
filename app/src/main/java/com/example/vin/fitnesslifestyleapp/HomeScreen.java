@@ -15,6 +15,7 @@ public class HomeScreen extends BaseDrawerActivity {
         setTitle("Home");
 
         ImageView logWork = (ImageView)findViewById(R.id.logIMG);
+
         logWork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -22,6 +23,7 @@ public class HomeScreen extends BaseDrawerActivity {
                 startActivity(addPage);
             }
         });
+
     }
 
     protected void onResume() {

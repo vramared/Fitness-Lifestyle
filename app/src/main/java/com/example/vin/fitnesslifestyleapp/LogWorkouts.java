@@ -2,7 +2,6 @@ package com.example.vin.fitnesslifestyleapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
@@ -30,18 +29,12 @@ import java.util.*;
 public class LogWorkouts extends BaseDrawerActivity {
 
     private String name, reps, sets, date;
-
     private List<Workout> workoutList;
-
     private boolean parseReps, parseSets;
     private Toast errorToast;
-
     private static final String FILE_NAME = "user_data.txt";
-
     private int duplicateCounter;
-
     private WorkoutAdapter adapter;
-
     private RecyclerView recyclerView;
 
 
@@ -57,7 +50,6 @@ public class LogWorkouts extends BaseDrawerActivity {
 
         adapter = new WorkoutAdapter(this, workoutList);
         recyclerView.setAdapter(adapter);
-
 
         openDialog();
         loadWorkouts();
@@ -156,10 +148,6 @@ public class LogWorkouts extends BaseDrawerActivity {
             workoutList.add(new Workout(rng(), name, date, sets, reps));
             saveWorkout();
         }
-        /*
-        Log.i("Has Duplicate", Boolean.toString(check));
-        Log.i("Line", Integer.toString(duplicateCounter));
-        */
     }
 
     public void saveWorkout() {

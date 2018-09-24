@@ -18,23 +18,13 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.facebook.login.widget.ProfilePictureView;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
-import java.util.Arrays;
 
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 public class BaseDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,9 +33,8 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     FrameLayout frameLayout;
     NavigationView navigationView;
     View headerView;
-    TextView fb_email;
-    String email = "test", fb_id;
-    TextView fb_name;
+    TextView fb_email, fb_name;
+    String email = "", fb_id;
     ProfilePictureView profilePictureView;
 
     @Override
